@@ -150,15 +150,6 @@ TStat::Double TStat::operator<(TStat::Double value, double err)
 }
 
 /*
- 
-TStat::Double TStat::operator<(TStat::Double value, int err)
-{
-    if(err > 0) value.errors.plus = err;
-    else if(err < 0) value.errors.minus = err;
-    return value;
-}
-
-
  * Adding two measurements
  */
 TStat::Double TStat::operator +(TStat::Double avalue, TStat::Double bvalue)
@@ -168,21 +159,10 @@ TStat::Double TStat::operator +(TStat::Double avalue, TStat::Double bvalue)
     std::cout << "NOT IMPLEMENTED YET" << std::endl;
     return value;
 }
-/*
-TStat::Integer operator +(TStat::Integer avalue, int bvalue)
-{
-    TStat::Integer value;
-    value.mean = avalue.mean+bvalue;
-    return value;
-}
 
-TStat::Double operator +(TStat::Integer avalue, TStat::Double bvalue)
-{
-    TStat value;
-    value.mean = avalue+bvalue.mean;
-    return value;
-}
-*/
+/*
+ * Adding double and Double
+ */
 TStat::Double TStat::operator +(TStat::Double avalue, double bvalue)
 {
     TStat::Double value;
@@ -190,6 +170,9 @@ TStat::Double TStat::operator +(TStat::Double avalue, double bvalue)
     return value;
 }
 
+/*
+ *
+ */
 TStat::Double TStat::operator +(double avalue, TStat::Double bvalue)
 {
     TStat::Double value;

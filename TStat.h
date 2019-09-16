@@ -13,7 +13,6 @@
 #include<iostream>
 
 namespace TStat {
-    //class Integer;
     class Double;
     struct Error {
         // The positive and negative errors
@@ -23,23 +22,31 @@ namespace TStat {
         double minus;
     };
 
+    // The error operator
     Error operator "" _err(long double err);
+
+    // The minus error operator
     Error operator- (Error);
+
+    // Adding two errors
     Error operator +(Error, Error);
 
+    // Sample struct // TODO
     struct Sample {
-        // Defined as a pointer in order
-        // to save from memory if one has
-        // many operations going on.
         unsigned long long sample;
     };
 
+    // Add an error to a mean value
+    // and create a Double
     Double operator +(double, Error);
+
+    // Operator for cout stream
     std::ostream &operator<<(std::ostream&, Double const&);
 
+    // The class for the Double
     class Double {
-
         private:
+
         public:
             // Constructor
             Double(){
@@ -51,16 +58,16 @@ namespace TStat {
                 errors.minus=0;
 
                 // Default sample size is 10000
-                sample.sample = 10000; //new unsigned long long(10000); 
+                sample.sample = 10000; 
             }
 
+            // Constructor
             Double (double meanv) {
                 mean = meanv;
             }
 
             // Deconstructor
             ~Double(){
-                //delete sample.sample;
             }
 
             // We have a mean, errors and sample
@@ -70,23 +77,15 @@ namespace TStat {
 
             // Assignment operators:
             void operator =(const double&);
-            //Double& operator =(const int&);
 
-            // 
+            // Redundant
             friend Double operator<(Double,double);
-            //friend Double operator<(Double,int);
 
             // Add an error to the object
             friend Double operator +(Double, Error);
             
             // Add a positive error to the object
             friend Double operator -(Double, Error);
-
-            // Add two errors
-            //friend Error operator +(Error, Error);
-
-            // Add a value and an error to get an object
-            //friend Double operator +(double, Error);
 
             // Sample generator operator
             friend Sample operator"" _gen(unsigned long long);
@@ -95,20 +94,15 @@ namespace TStat {
             friend Double operator +(Double,Double);
 
             // Add an integer or double to a measurement
-            //friend Double operator +(Double,int);
             friend Double operator +(Double,double);
-            //friend Double operator +(int,Double);
             friend Double operator +(double,Double);
 
-            // Conversion from TStat to double
+            // Conversion from TStat to double // TODO
             //operator double () const;
+            
+            // Print via ostream
             std::ostream &Print(std::ostream&) const;
-
-            //friend std::ostream &operator<<(std::ostream&, Double const&);
     };
-
-    // kmkmk
-    //Double operator +(double, Error);
 }
 
 #endif
