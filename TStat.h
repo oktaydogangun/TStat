@@ -1,8 +1,9 @@
 /*
  *  Tool for Statistical Operations in Physics
  *
- *  Author: Oktay DOĞANGÜN <oktay.dogangun@gmail.com>
+ *  TStat.h
  *
+ *  Author: Oktay DOĞANGÜN <oktay.dogangun@gmail.com>
  *  Inspired by: Kıyami ERDİM
  *
  */

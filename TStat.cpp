@@ -1,3 +1,13 @@
+/*
+ *  Tool for Statistical Operations in Physics
+ *
+ *  TStat.cpp
+ *
+ *  Author: Oktay DOĞANGÜN <oktay.dogangun@gmail.com>
+ *  Inspired by: Kıyami ERDİM
+ *
+ */
+
 #include"TStat.h"
 
 using namespace TStat;
@@ -10,21 +20,6 @@ void TStat::Double::operator =(const double &meanv)
 }
 
 /*
-TStat::Double& TStat::operator =(const int &meanv)
-{
-    mean = meanv;
-    return *this;
-}
-*/
-/*
- * Conversion from TStat to double
- 
-TStat::Double::operator double() const
-{
-    return mean;
-}
-
-
  * Error operator
  *
  * Example:
@@ -35,14 +30,12 @@ TStat::Double::operator double() const
  *
  */
 
-//namespace TStat{
 TStat::Error TStat::operator"" _err(long double err) {
         TStat::Error error;
         error.plus = err;
         error.minus = 0;
         return error;
     }
-//}
 
 /*
  * Printing std::cout for a TStat
