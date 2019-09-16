@@ -7,87 +7,108 @@
  *
  */
 
-class TStat {
+#ifndef TSTAT_H
+#define TSTAT_H
 
-    private:
-        struct Error
-        {
-            // The positive and negative errors
-            // are held seperately and without 
-            // a signiture 
-            Double_t plus;
-            Double_t minus;
-        };
+#include<iostream>
 
-        struct Sample {
-            // Defined as a pointer in order
-            // to save from memory if one has
-            // many operations going on.
-            unsigned long long *sample;
-        };
+namespace TStat {
+    //class Integer;
+    class Double;
+    struct Error {
+        // The positive and negative errors
+        // are held seperately and without 
+        // a signiture 
+        double plus;
+        double minus;
+    };
 
-    public:
-        // Constructor
-        TStat(){
-            // Set mean to 0
-            mean =0;
-            // and no errors, yet
-            errors.plus=0;
-            errors.minus=0;
+    Error operator "" _err(long double err);
+    Error operator- (Error);
+    Error operator +(Error, Error);
 
-            // Default sample size is 10000
-            sample.sample = new unsigned long long(10000); 
-        }
+    struct Sample {
+        // Defined as a pointer in order
+        // to save from memory if one has
+        // many operations going on.
+        unsigned long long sample;
+    };
 
-        // Deconstructor
-        ~TStat(){
-            delete sampla.sample;
-        }
+    Double operator +(double, Error);
+    std::ostream &operator<<(std::ostream&, Double const&);
 
-        // We have a mean, errors and sample
-        Double_t mean;
-        Error errors;
-        Sample sample;
+    class Double {
 
-        // Assignment operators:
-        TStat& operator =(const Double_t&);
-        TStat& operator =(const Int_t&);
+        private:
+        public:
+            // Constructor
+            Double(){
+                // Set mean to 0
+                mean =0;
 
-        // 
-        friend TStat operator<(TStat,Double_t);
-        friend TStat operator<(TStat,Int_t);
+                // and no errors, yet
+                errors.plus=0;
+                errors.minus=0;
 
-        // Error operator
-        friend Error operator"" _e(long double);
+                // Default sample size is 10000
+                sample.sample = 10000; //new unsigned long long(10000); 
+            }
 
-        // Handles negative errors
-        friend Error operator- (Error);
+            Double (double meanv) {
+                mean = meanv;
+            }
 
-        // Add an error to the object
-        friend TStat operator +(TStat, Error);
-        
-        // Add a positive error to the object
-        friend TStat operator -(TStat, Error);
+            // Deconstructor
+            ~Double(){
+                //delete sample.sample;
+            }
 
-        // Add two errors
-        friend Error operator +(Error, Error);
+            // We have a mean, errors and sample
+            double mean;
+            Error errors;
+            Sample sample;
 
-        // Add a value and an error to get an object
-        friend TStat operator +(Double_t, Error);
+            // Assignment operators:
+            void operator =(const double&);
+            //Double& operator =(const int&);
 
-        // Sample generator operator
-        friend Sample operator"" _gen(unsigned long long);
+            // 
+            friend Double operator<(Double,double);
+            //friend Double operator<(Double,int);
 
-        // Add two measurements with asymmetric errors
-        friend TStat operator +(TStat,TStat);
+            // Add an error to the object
+            friend Double operator +(Double, Error);
+            
+            // Add a positive error to the object
+            friend Double operator -(Double, Error);
 
-        // Add an integer or double to a measurement
-        friend TStat operator +(TStat,Int_t);
-        friend TStat operator +(TStat,Double_t);
-        friend TStat operator +(Int_t,TStat);
-        friend TStat operator +(Double_t,TStat);
+            // Add two errors
+            //friend Error operator +(Error, Error);
 
-        // Conversion from TStat to double
-        operator Double_t () const;
-};
+            // Add a value and an error to get an object
+            //friend Double operator +(double, Error);
 
+            // Sample generator operator
+            friend Sample operator"" _gen(unsigned long long);
+
+            // Add two measurements with asymmetric errors
+            friend Double operator +(Double,Double);
+
+            // Add an integer or double to a measurement
+            //friend Double operator +(Double,int);
+            friend Double operator +(Double,double);
+            //friend Double operator +(int,Double);
+            friend Double operator +(double,Double);
+
+            // Conversion from TStat to double
+            //operator double () const;
+            std::ostream &Print(std::ostream&) const;
+
+            //friend std::ostream &operator<<(std::ostream&, Double const&);
+    };
+
+    // kmkmk
+    //Double operator +(double, Error);
+}
+
+#endif
